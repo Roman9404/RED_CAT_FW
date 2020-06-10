@@ -1,7 +1,7 @@
 [PreviousGenFiles]
-HeaderPath=D:/WORK/My projects/motohelmet/firmware/firmware2.0.11/helmet_unit_2_0_1/Inc
+HeaderPath=D:/WORK/My projects/motohelmet/RED_CAT/RED_CAT_FW/helmet_unit/Inc
 HeaderFiles=stm32f1xx_it.h;stm32f1xx_hal_conf.h;main.h;
-SourcePath=D:/WORK/My projects/motohelmet/firmware/firmware2.0.11/helmet_unit_2_0_1/Src
+SourcePath=D:/WORK/My projects/motohelmet/RED_CAT/RED_CAT_FW/helmet_unit/Src
 SourceFiles=stm32f1xx_it.c;stm32f1xx_hal_msp.c;main.c;
 
 [PreviousLibFiles]

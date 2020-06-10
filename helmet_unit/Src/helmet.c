@@ -10,6 +10,8 @@ TIM_HandleTypeDef htim1;
 ADC_HandleTypeDef hadc1;
 ADC_HandleTypeDef hadc2;
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim;
+
 extern int connect_flag;
 extern int stop_flag;
 int search_flag = 1;
@@ -127,7 +129,7 @@ void CONNECT(uint8_t pip_num)
 		TIM2->CCR4 = 0;
 
 		connect_flag = 0;
-
+		green_off;
 	}
 
 	HAL_TIM_OC_Start_IT(&htim3,TIM_CHANNEL_4);
@@ -167,6 +169,7 @@ void HELMET_SEARCH(uint8_t pip_num)
 		//*/
 		search_flag = 0;
 		HAL_TIM_OC_Start_IT(&htim1, TIM_CHANNEL_1);
+		blue_on;
 		schet++;
 	}
 	light_check_flag = 0;
@@ -183,14 +186,12 @@ void light_check()
 	if (adc>=4000)
 		{
 			TIM2->CCR2 = 100;
-			blue_off;
-			green_on
+			red_on;
 		}
 	else
 		{
 			TIM2->CCR2 = 400;
-			green_off;
-			blue_on;
+			red_off;
 		}
 }
 

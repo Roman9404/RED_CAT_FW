@@ -83,6 +83,9 @@ int connect_flag = 0;
 extern uint32_t address_0;
 extern uint32_t address_1;
 extern uint32_t address_2;
+extern int sek;
+extern int sek2;
+extern search_flag;
 uint32_t my_addres = 0;
 
 extern bat_adc;
@@ -441,7 +444,7 @@ static void MX_TIM1_Init(void)
   htim1.Init.Prescaler = 7199;
   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim1.Init.Period = 9999;
-  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV2;
   htim1.Init.RepetitionCounter = 0;
   htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_OC_Init(&htim1) != HAL_OK)
@@ -462,6 +465,10 @@ static void MX_TIM1_Init(void)
   sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
   sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
   if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_OC_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
   }
@@ -726,20 +733,46 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+//void TIM_1_Callback(TIM_HandleTypeDef *htim)
+void HAL_TIM_OC_DelayElapsedCallback (TIM_HandleTypeDef *htim)
+{
+    if(htim->Instance == TIM1)
+    {
+    	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+    	{
+    		sek++;
+    		if (sek == 2)
+    		{
+    			search_flag = 1;
+    			HAL_TIM_OC_Stop_IT(&htim1, TIM_CHANNEL_1);
+    			sek = 0;
+    			blue_off;
+    		}
+    	}
+
+    	if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+    	{
+    		sek2++;
+    		if (sek2 == 20)
+    		{
+    			green_off;
+    			HAL_TIM_OC_Stop_IT(&htim1, TIM_CHANNEL_2);
+    			sek2 = 0;
+    			connect_flag=0;
+    		//	HAL_TIM_Base_Stop_IT(&htim4);
+    		//	c=0;
+    			TIM2->CCR3 = 0;
+    			TIM2->CCR4 = 0;
+    		}
+    	}
+    }
+}
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	int c = 0;
 	HAL_Delay(200);
-	if(((HAL_GPIO_ReadPin(GPIOA,CONNECT_BTN_Pin))== 0)&&((HAL_GPIO_ReadPin(GPIOA,ON_BTN_Pin))== 1))
-	{
-		//gabarit_btn();
-		while(((HAL_GPIO_ReadPin(GPIOA,CONNECT_BTN_Pin))== 0)&&((HAL_GPIO_ReadPin(GPIOA,ON_BTN_Pin))== 1))
-		{
 
-		}
-	}
-	else
-	{
 	if(GPIO_Pin == CONNECT_BTN_Pin)
 	{
 		while((HAL_GPIO_ReadPin(GPIOA,CONNECT_BTN_Pin))== 0)
@@ -791,11 +824,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 				}
 
 				TIM2->CCR1 = 0;
-			//	TIM2->CCR2 = 0;
-				light_check_flag = 1;
-
 				TIM2->CCR3 = 0;
 				TIM2->CCR4 = 0;
+				light_check_flag = 1;
 			}
 		}
 		if ((c < 500000)&&(c > 50000))
@@ -803,7 +834,9 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 				TIM2->CCR3 = 500;
 				TIM2->CCR4 = 500;
-				HAL_TIM_Base_Start_IT(&htim4);
+				//HAL_TIM_Base_Start_IT(&htim4);
+				HAL_TIM_OC_Start_IT(&htim1, TIM_CHANNEL_2);
+				green_on;
 				connect_flag = 1;
 		}
 	}
@@ -839,8 +872,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 		}
 	}
-	}
 }
+
 /* USER CODE END 4 */
 
 /**

@@ -68,6 +68,7 @@ int c = 0;
 int sek = 0;
 int bat_lvl = 0;
 int stop_flag = 30;
+int sek2 = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -259,7 +260,7 @@ void EXTI2_IRQHandler(void)
 void TIM1_CC_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_CC_IRQn 0 */
-sek++;
+/*sek++;
 if (sek == 2)
 {
 	search_flag = 1;
@@ -267,6 +268,8 @@ if (sek == 2)
 	HAL_TIM_OC_Stop_IT(&htim1, TIM_CHANNEL_1);
 	sek = 0;
 }
+*/
+//	 TIM_1_Callback(&htim1);
   /* USER CODE END TIM1_CC_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
   /* USER CODE BEGIN TIM1_CC_IRQn 1 */
@@ -339,7 +342,7 @@ void TIM3_IRQHandler(void)
 void TIM4_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM4_IRQn 0 */
-	c++;
+/*	c++;
 	//HAL_GPIO_TogglePin(GPIOC,RED_Pin);
 	if (c==4)
 	{
@@ -350,7 +353,7 @@ void TIM4_IRQHandler(void)
 		TIM2->CCR4 = 0;
 		blue_off;
 		//HAL_GPIO_WritePin(GPIOC,RED_Pin, GPIO_PIN_RESET);
-	}
+	}*/
   /* USER CODE END TIM4_IRQn 0 */
   HAL_TIM_IRQHandler(&htim4);
   /* USER CODE BEGIN TIM4_IRQn 1 */
