@@ -124,6 +124,8 @@ void Error_Handler(void);
 #define CE_GPIO_Port GPIOB
 #define CSN_Pin GPIO_PIN_6
 #define CSN_GPIO_Port GPIOB
+#define GABARIT_2_Pin GPIO_PIN_7
+#define GABARIT_2_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

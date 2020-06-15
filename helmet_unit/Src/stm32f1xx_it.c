@@ -85,7 +85,6 @@ int sek2 = 0;
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim2;
 extern TIM_HandleTypeDef htim3;
-extern TIM_HandleTypeDef htim4;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -334,31 +333,6 @@ void TIM3_IRQHandler(void)
 	  stop_flag = 30;
   }
   /* USER CODE END TIM3_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM4 global interrupt.
-  */
-void TIM4_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM4_IRQn 0 */
-/*	c++;
-	//HAL_GPIO_TogglePin(GPIOC,RED_Pin);
-	if (c==4)
-	{
-		connect_flag=0;
-		HAL_TIM_Base_Stop_IT(&htim4);
-		c=0;
-		TIM2->CCR3 = 0;
-		TIM2->CCR4 = 0;
-		blue_off;
-		//HAL_GPIO_WritePin(GPIOC,RED_Pin, GPIO_PIN_RESET);
-	}*/
-  /* USER CODE END TIM4_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim4);
-  /* USER CODE BEGIN TIM4_IRQn 1 */
-
-  /* USER CODE END TIM4_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
