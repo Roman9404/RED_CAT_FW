@@ -6,12 +6,13 @@
  */
 #include "motorcycle.h"
 
-int search_flag = 0;
+int search_flag = 1;
 int helmet_numbers = 0;
 extern int advertize_flag;
 uint32_t helmet_address[3];
 uint32_t address;
 TIM_HandleTypeDef htim4;
+TIM_HandleTypeDef htim2;
 
 void TEST (uint16_t command,uint16_t light, uint16_t status)
 {
@@ -41,8 +42,18 @@ void TEST (uint16_t command,uint16_t light, uint16_t status)
 void ADVERTIZE ()
 {
 	blue_on;
+	search_flag = 0;
 	NRF.com = advert;
 	HAL_TIM_Base_Start_IT(&htim4);
+
+	HAL_TIM_Base_Stop(&htim2);
+	HAL_TIM_Base_Stop_IT(&htim2);
+/*
+    HAL_NVIC_DisableIRQ(EXTI3_IRQn);
+    HAL_NVIC_DisableIRQ(EXTI4_IRQn);
+    HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
+    HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
+*/
     while (advertize_flag == 1)
     {
     	write(&NRF, 20);
@@ -59,22 +70,32 @@ void ADVERTIZE ()
     	}
     	//HAL_Delay(50);
     }
+/*
+    HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+    HAL_NVIC_EnableIRQ(EXTI4_IRQn);
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+    HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+*/
+    HAL_TIM_Base_Start(&htim2); //таймер запускающий функцию search
+    HAL_TIM_Base_Start_IT(&htim2);
+
 	HAL_TIM_Base_Stop_IT(&htim4);
+	search_flag = 1;
     blue_off;
 
 }
 
 void HELMET_SEARCH()
 {
-	search_flag = 0;
 	int q = 0;
 	helmet_address[0]= 0;
 	helmet_address[1]= 0;
 	helmet_address[2]= 0;
 
-	red_on;
+	//red_on;
+	HAL_GPIO_TogglePin(GPIOC, RED_Pin);
 	NRF.com = search;
-	for (int i=0; i<=5; i++)
+	for (int i=0; i<=3; i++)
 	{
 		write(&NRF, 20);
 		if(isAckPayloadAvailable()) // проверяем пришло ли что-то вместе с ответом
@@ -99,7 +120,7 @@ void HELMET_SEARCH()
 	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
-	red_off;
+	//red_off;
 }
 
 
@@ -119,6 +140,8 @@ void unique_id()
 
 void WORK (uint16_t command,uint16_t light, uint16_t status)
 {
+	search_flag = 0;
+
 	NRF.com = command;
 	NRF.lght  = light;
 	NRF.status0 = status;
@@ -143,5 +166,6 @@ void WORK (uint16_t command,uint16_t light, uint16_t status)
 		}
 	}
 	ANSW.data1 = 0x00;
+	search_flag = 1;
 	green_off;
 }

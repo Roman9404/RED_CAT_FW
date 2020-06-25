@@ -1,5 +1,5 @@
-motorcycle.c:16:6:TEST	16	static
-motorcycle.c:41:6:ADVERTIZE	24	static
-motorcycle.c:67:6:HELMET_SEARCH	24	static
-motorcycle.c:106:6:unique_id	16	static
-motorcycle.c:120:6:WORK	32	static
+motorcycle.c:17:6:TEST	16	static
+motorcycle.c:42:6:ADVERTIZE	32	static
+motorcycle.c:88:6:HELMET_SEARCH	24	static
+motorcycle.c:127:6:unique_id	16	static
+motorcycle.c:141:6:WORK	40	static

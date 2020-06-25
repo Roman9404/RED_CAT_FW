@@ -280,16 +280,16 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 0 */
 
  sek++;
- if (sek == 10)
+ if ((sek == 60)&&(search_flag == 1))
  {
-	 HAL_NVIC_DisableIRQ(EXTI1_IRQn);
-	 HAL_NVIC_DisableIRQ(EXTI3_IRQn);
-	 HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
-	 HAL_NVIC_DisableIRQ(EXTI15_10_IRQn);
 	 sek = 0;
-	 search_flag = 1;
+//	 search_flag = 1;
 	 HELMET_SEARCH();
  }
+ if ((sek == 5)&&(search_flag == 0))
+  {
+	 sek = 0;
+  }
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
@@ -304,7 +304,7 @@ void TIM4_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM4_IRQn 0 */
 	c++;
-	if (c == 40)
+	if (c == 20)
 	{
 		advertize_flag = 0;
 		c=0;

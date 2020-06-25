@@ -148,10 +148,16 @@ int main(void)
     unique_id();
    HAL_GPIO_WritePin(GPIOC, RED_Pin|GREEN_Pin|BLUE_Pin, GPIO_PIN_RESET);
 
+
+
+   if((HAL_GPIO_ReadPin(GPIOB,STOP_Pin))== 0)
+   {
+	   advertize_flag = 1;
+	   ADVERTIZE();//TEST(work,stop,on);
+   }
+
    HAL_TIM_Base_Start(&htim2); //таймер запускающий функцию search
    HAL_TIM_Base_Start_IT(&htim2);
-   advertize_flag = 1;
-   if((HAL_GPIO_ReadPin(GPIOB,STOP_Pin))== 0) 	ADVERTIZE();//TEST(work,stop,on);
    HELMET_SEARCH();
 //   HAL_TIM_Base_Start_IT(&htim4);
 
@@ -562,13 +568,13 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI3_IRQn, 2, 0);
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 2, 0);
+  HAL_NVIC_SetPriority(EXTI4_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI4_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 2, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 2, 0);

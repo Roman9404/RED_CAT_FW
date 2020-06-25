@@ -160,7 +160,7 @@ void HELMET_SEARCH(uint8_t pip_num)
 		HAL_Delay(20);
 		writeAckPayload(pip_num, &ANSW, 6);
 		HAL_Delay(20);
-		writeAckPayload(pip_num, &ANSW, 6);
+	/*	writeAckPayload(pip_num, &ANSW, 6);
 		HAL_Delay(20);
 		writeAckPayload(pip_num, &ANSW, 6);
 		HAL_Delay(20);
@@ -173,7 +173,7 @@ void HELMET_SEARCH(uint8_t pip_num)
 		schet++;
 	}
 	light_check_flag = 0;
-	stop_flag = 30;
+	stop_flag = 120;
 //	if (TIM2->CCR1 != 1000) TIM2->CCR1 = 100;
 }
 

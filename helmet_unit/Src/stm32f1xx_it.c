@@ -330,7 +330,7 @@ void TIM3_IRQHandler(void)
 
 	  }
 
-	  stop_flag = 30;
+	  stop_flag = 120;
   }
   /* USER CODE END TIM3_IRQn 1 */
 }
