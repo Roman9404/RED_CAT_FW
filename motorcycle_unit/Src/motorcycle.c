@@ -115,10 +115,10 @@ void HELMET_SEARCH()
 	helmet_numbers = q;
 	q=0;
 
-	HAL_NVIC_EnableIRQ(EXTI1_IRQn);
-	HAL_NVIC_EnableIRQ(EXTI3_IRQn);
-	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+//	HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+//	HAL_NVIC_EnableIRQ(EXTI3_IRQn);
+//	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+//	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 	//red_off;
 }
@@ -140,7 +140,7 @@ void unique_id()
 
 void WORK (uint16_t command,uint16_t light, uint16_t status)
 {
-	search_flag = 0;
+//	search_flag = 0;
 
 	NRF.com = command;
 	NRF.lght  = light;
@@ -166,6 +166,6 @@ void WORK (uint16_t command,uint16_t light, uint16_t status)
 		}
 	}
 	ANSW.data1 = 0x00;
-	search_flag = 1;
+//	search_flag = 1;
 	green_off;
 }

@@ -31,6 +31,10 @@ uint32_t address_2 = 0;
 
 void TEST (uint8_t pipe_num)
 {
+	NRF.com = 0;
+	NRF.addr0 = 0;
+	NRF.addr1 = 0;
+	NRF.addr2 = 0;
 	if(pipe_num == 1)
 	{
 		read(&NRF, 20); // Читаем данные в массив nrf_data и указываем сколько байт читать
@@ -173,7 +177,7 @@ void HELMET_SEARCH(uint8_t pip_num)
 		schet++;
 	}
 	light_check_flag = 0;
-	stop_flag = 120;
+	stop_flag = 300;
 //	if (TIM2->CCR1 != 1000) TIM2->CCR1 = 100;
 }
 

@@ -1,8 +1,8 @@
-helmet.c:51:6:WORK	8	static
-helmet.c:91:6:CONNECT	32	static
-helmet.c:150:6:HELMET_SEARCH	24	static
+helmet.c:52:6:WORK	8	static
+helmet.c:92:6:CONNECT	32	static
+helmet.c:151:6:HELMET_SEARCH	24	static
 helmet.c:32:6:TEST	16	static
-helmet.c:180:6:light_check	8	static
-helmet.c:198:6:unique_id	16	static
-helmet.c:211:6:battery_check	16	static
-helmet.c:268:6:gabarit_btn	0	static
+helmet.c:181:6:light_check	8	static
+helmet.c:199:6:unique_id	16	static
+helmet.c:212:6:battery_check	16	static
+helmet.c:269:6:gabarit_btn	0	static

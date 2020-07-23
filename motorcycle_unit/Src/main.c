@@ -156,9 +156,9 @@ int main(void)
 	   ADVERTIZE();//TEST(work,stop,on);
    }
 
-   HAL_TIM_Base_Start(&htim2); //таймер запускающий функцию search
-   HAL_TIM_Base_Start_IT(&htim2);
-   HELMET_SEARCH();
+//   HAL_TIM_Base_Start(&htim2); //таймер запускающий функцию search
+//   HAL_TIM_Base_Start_IT(&htim2);
+//   HELMET_SEARCH();
 //   HAL_TIM_Base_Start_IT(&htim4);
 
 
@@ -178,11 +178,12 @@ int main(void)
 	  	 // {
 //	  if (HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_8)==0)
 //	  if (search_flag == 1) HELMET_SEARCH();
-	  if((HAL_GPIO_ReadPin(GPIOA,GABARIT_Pin))== 0)
-	  {
-		  advertize_flag = 1;
-		  ADVERTIZE();
-	  }
+
+//	  if((HAL_GPIO_ReadPin(GPIOA,GABARIT_Pin))== 0)
+//	  {
+//		  advertize_flag = 1;
+//		  ADVERTIZE();
+//	  }
 
   }
   /* USER CODE END 3 */

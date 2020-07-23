@@ -284,7 +284,7 @@ void TIM2_IRQHandler(void)
  {
 	 sek = 0;
 //	 search_flag = 1;
-	 HELMET_SEARCH();
+//	 HELMET_SEARCH();
  }
  if ((sek == 5)&&(search_flag == 0))
   {

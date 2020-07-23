@@ -2,4 +2,4 @@ motorcycle.c:17:6:TEST	16	static
 motorcycle.c:42:6:ADVERTIZE	32	static
 motorcycle.c:88:6:HELMET_SEARCH	24	static
 motorcycle.c:127:6:unique_id	16	static
-motorcycle.c:141:6:WORK	40	static
+motorcycle.c:141:6:WORK	32	static
